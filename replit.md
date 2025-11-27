@@ -74,6 +74,8 @@ These files are gitignored to prevent committing sensitive data.
   - Created project documentation
 
 ## Notes
-- The application requires a valid Dropbox access token
+- The application requires a valid Dropbox access token for cloud uploads
+- To enable Dropbox: Add `DROPBOX_ACCESS_TOKEN` secret via Replit's Secrets tab
+- Get a token from: https://www.dropbox.com/developers/apps (create app, generate OAuth 2 token)
 - Encrypted files use CKKS homomorphic encryption scheme (allows operations on encrypted data)
 - Network operations include retry logic for reliability
