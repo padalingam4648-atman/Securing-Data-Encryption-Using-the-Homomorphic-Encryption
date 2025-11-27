@@ -2,6 +2,7 @@ import tenseal as ts
 import base64
 import gzip
 import os
+import sys
 import dropbox
 from retrying import retry  # For retrying network operations
 
@@ -101,18 +102,29 @@ def upload_to_dropbox(access_token, file_path):
         raise  # Retry in case of other transient issues
 
 if __name__ == "__main__":
-    input_file = input("Enter the path of the input .txt file: ")
+    if len(sys.argv) < 2:
+        print("Usage: python 'Securing Cloud Storage Using Homomorphic Encryption.py' <input_file.txt>")
+        print("\nExample: python 'Securing Cloud Storage Using Homomorphic Encryption.py' sample.txt")
+        print("\nNote: Set DROPBOX_ACCESS_TOKEN environment variable for Dropbox upload.")
+        sys.exit(1)
+    
+    input_file = sys.argv[1]
+    
     ascii_file = convert_to_ascii(input_file)
     if not ascii_file:
-        exit()
+        sys.exit(1)
 
     encrypted_file = encrypt_file(ascii_file)
     if not encrypted_file:
-        exit()
+        sys.exit(1)
 
     compressed_file = compress_and_reduce_file(encrypted_file)
     if not compressed_file:
-        exit()
+        sys.exit(1)
 
-    access_token = input("Enter your Dropbox access token: ")
-    upload_to_dropbox(access_token, compressed_file)
+    access_token = os.environ.get('DROPBOX_ACCESS_TOKEN')
+    if access_token:
+        upload_to_dropbox(access_token, compressed_file)
+    else:
+        print("\nDropbox upload skipped: DROPBOX_ACCESS_TOKEN environment variable not set.")
+        print(f"Encrypted and compressed file saved locally as: {compressed_file}")

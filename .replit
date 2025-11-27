@@ -21,9 +21,9 @@ args = "Run Application"
 name = "Run Application"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python \"Securing Cloud Storage Using Homomorphic Encryption.py\""
-
 [workflows.workflow.metadata]
 outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python \"Securing Cloud Storage Using Homomorphic Encryption.py\" sample.txt"

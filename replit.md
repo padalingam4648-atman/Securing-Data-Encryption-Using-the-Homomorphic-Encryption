@@ -29,19 +29,27 @@ The project showcases how to:
 
 ## How to Use
 
-1. Run the application from the Replit console
-2. Provide the path to a text file when prompted
-3. Enter your Dropbox access token when requested
-4. The application will:
-   - Convert the file to ASCII
-   - Encrypt it using homomorphic encryption
-   - Compress the encrypted file
-   - Upload to your Dropbox account
+### Method 1: Using the Workflow (Recommended)
+1. Click the "Run" button in Replit - it will process the included `sample.txt` file
+2. To process your own file, update the workflow command in the Replit interface
+3. (Optional) Set the `DROPBOX_ACCESS_TOKEN` environment variable to enable Dropbox upload
+
+### Method 2: Using the Shell
+1. Open the Shell tab in Replit
+2. Run: `python "Securing Cloud Storage Using Homomorphic Encryption.py" your_file.txt`
+3. (Optional) Set the `DROPBOX_ACCESS_TOKEN` environment variable to enable Dropbox upload
+
+The application will:
+- Convert the file to ASCII
+- Encrypt it using homomorphic encryption
+- Compress the encrypted file
+- Upload to Dropbox (if access token is configured) or save locally
 
 ## File Structure
 ```
 .
 ├── Securing Cloud Storage Using Homomorphic Encryption.py  # Main application
+├── sample.txt                                              # Sample input file
 ├── .gitignore                                              # Git ignore patterns
 ├── pyproject.toml                                          # Python dependencies
 └── replit.md                                               # This documentation
@@ -57,10 +65,12 @@ These files are gitignored to prevent committing sensitive data.
 
 ## Recent Changes
 - **2025-11-27**: Initial import and setup in Replit environment
-  - Installed Python 3.11 and all dependencies
-  - Added numpy dependency (required by tenseal)
+  - Installed Python 3.11 and all dependencies (tenseal, dropbox, retrying, numpy)
+  - Modified application to use command-line arguments instead of interactive input
+  - Changed Dropbox token to use environment variable (DROPBOX_ACCESS_TOKEN)
+  - Created sample.txt for testing
   - Created .gitignore for Python project
-  - Configured workflow to run the application
+  - Configured workflow to run the application with sample file
   - Created project documentation
 
 ## Notes
