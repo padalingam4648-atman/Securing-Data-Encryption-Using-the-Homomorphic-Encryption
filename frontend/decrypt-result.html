@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decryption Result - Homomorphic Encryption</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Animated Background -->
+        <div class="binary-bg"></div>
+        
+        <!-- Result Card -->
+        <div class="glass-card result-card fade-in">
+            <!-- Success/Error Icon -->
+            <div class="success-checkmark" id="resultIcon">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <h1 class="title" id="resultTitle">Decryption Complete!</h1>
+            <p class="description" id="resultDescription">Your file has been successfully decrypted</p>
+            
+            <!-- Security Notice -->
+            <div class="security-notice" id="securityNotice">
+                <div class="notice-icon">✅</div>
+                <div class="notice-content">
+                    <strong>Client-Side Decryption</strong>
+                    <p>Your data was decrypted entirely in your browser. No server had access to your plaintext or secret key.</p>
+                </div>
+            </div>
+            
+            <!-- Decrypted Output Preview -->
+            <div class="output-section" id="outputSection">
+                <h3 class="output-title">Decrypted Output</h3>
+                <div class="output-box" id="decryptedOutput">
+                    Loading...
+                </div>
+                <div class="output-actions">
+                    <button class="btn-secondary" onclick="copyToClipboard()">
+                        📋 Copy to Clipboard
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Error Section (hidden by default) -->
+            <div class="error-section" id="errorSection" style="display: none;">
+                <div class="error-icon">❌</div>
+                <h3>Decryption Failed</h3>
+                <p id="errorText"></p>
+                <div class="error-reasons">
+                    <h4>Possible reasons:</h4>
+                    <ul>
+                        <li>Incorrect secret key</li>
+                        <li>Wrong encryption method selected</li>
+                        <li>Corrupted encrypted file</li>
+                        <li>Key and file mismatch</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="button-group">
+                <button class="btn-primary" id="downloadBtn" onclick="downloadPlaintext()">
+                    💾 Download Decrypted File
+                </button>
+                <button class="btn-secondary" onclick="window.location.href='decrypt.html'">
+                    🔓 Decrypt Another File
+                </button>
+            </div>
+            
+            <button class="btn-text" onclick="window.location.href='index.html'">
+                ← Back to Home
+            </button>
+        </div>
+    </div>
+    
+    <script src="js/decrypt-result.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File - Homomorphic Encryption</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Animated Background -->
+        <div class="binary-bg"></div>
+        
+        <!-- Upload Card -->
+        <div class="glass-card upload-card fade-in">
+            <h1 class="title">Upload Your File</h1>
+            <p class="description">Encrypt your file using CKKS Homomorphic Encryption</p>
+            
+            <!-- Security Info -->
+            <div class="security-notice">
+                <div class="notice-icon">🔐</div>
+                <div class="notice-content">
+                    <strong>CKKS Homomorphic Encryption</strong>
+                    <p>128-bit security • 8192 polynomial degree • Client-side key generation</p>
+                </div>
+            </div>
+            
+            <!-- File Upload -->
+            <div class="upload-section">
+                <h3 class="section-title">Select File to Encrypt</h3>
+                <!-- Drag and Drop Area -->
+                <div class="drop-zone" id="dropZone">
+                    <svg class="upload-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="uploadGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#2563EB;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 50 20 L 50 60" stroke="url(#uploadGradient)" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M 35 35 L 50 20 L 65 35" stroke="url(#uploadGradient)" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        <path d="M 20 70 L 20 80 Q 20 85 25 85 L 75 85 Q 80 85 80 80 L 80 70" stroke="url(#uploadGradient)" stroke-width="4" stroke-linecap="round" fill="none"/>
+                    </svg>
+                    <p class="drop-text">Drag & Drop your file here</p>
+                    <p class="drop-subtext">or</p>
+                    <label for="fileInput" class="btn-secondary">Browse Files</label>
+                    <input type="file" id="fileInput" accept=".txt" hidden>
+                </div>
+                
+                <!-- File Info Display -->
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <div class="file-details">
+                        <span class="file-icon">📄</span>
+                        <div class="file-text">
+                            <p class="file-name" id="fileName"></p>
+                            <p class="file-size" id="fileSize"></p>
+                        </div>
+                    </div>
+                    <button class="btn-remove" id="removeBtn">✕</button>
+                </div>
+            </div>
+            
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage" style="display: none;"></div>
+            
+            <!-- Upload Button -->
+            <button class="btn-primary neon-glow" id="uploadBtn" disabled>
+                Encrypt File
+            </button>
+            
+            <!-- Back Button -->
+            <button class="btn-text" onclick="window.location.href='index.html'">
+                ← Back to Home
+            </button>
+        </div>
+    </div>
+    
+    <script src="js/upload.js"></script>
+</body>
+</html>

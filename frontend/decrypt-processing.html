@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decrypting - Homomorphic Encryption</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <script src="js/ckks-encryption.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Animated Background -->
+        <div class="binary-bg active"></div>
+        
+        <!-- Processing Card -->
+        <div class="glass-card processing-card fade-in">
+            <!-- Unlocking Animation -->
+            <div class="lock-container">
+                <svg class="lock-icon processing-lock" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="unlockGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="30" y="45" width="40" height="35" rx="5" fill="url(#unlockGradient)" stroke="#fff" stroke-width="2"/>
+                    <path id="lockShackle" d="M 35 45 L 35 35 Q 35 20 50 20 Q 65 20 65 35 L 65 45" fill="none" stroke="url(#unlockGradient)" stroke-width="4"/>
+                    <circle cx="50" cy="60" r="4" fill="#fff"/>
+                    <line x1="50" y1="64" x2="50" y2="72" stroke="#fff" stroke-width="2"/>
+                </svg>
+            </div>
+            
+            <h1 class="title">Decrypting Your File</h1>
+            <p class="description">Client-side decryption in progress...</p>
+            
+            <!-- Security Notice -->
+            <div class="security-notice">
+                <div class="notice-icon">🔒</div>
+                <div class="notice-content">
+                    <strong>Zero-Knowledge Decryption</strong>
+                    <p>Your secret key and plaintext never leave your browser</p>
+                </div>
+            </div>
+            
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step" id="step1">
+                    <div class="step-icon">
+                        <div class="spinner"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-title">Validating Secret Key</h3>
+                        <p class="step-description">Verifying key format and authenticity...</p>
+                    </div>
+                </div>
+                
+                <div class="step" id="step2">
+                    <div class="step-icon">
+                        <div class="spinner"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-title">Loading Encryption Context</h3>
+                        <p class="step-description">Initializing decryption parameters...</p>
+                    </div>
+                </div>
+                
+                <div class="step" id="step3">
+                    <div class="step-icon">
+                        <div class="spinner"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-title">Decrypting Data</h3>
+                        <p class="step-description">Performing homomorphic decryption...</p>
+                    </div>
+                </div>
+                
+                <div class="step" id="step4">
+                    <div class="step-icon">
+                        <div class="spinner"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-title">Converting to Plaintext</h3>
+                        <p class="step-description">Reconstructing original data...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p class="progress-text" id="progressText">0%</p>
+            <p class="progress-text" id="statusText" style="font-size: 1rem; margin-top: 10px; color: var(--text-hint);"></p>
+        </div>
+    </div>
+    
+    <script src="js/decrypt-process.js"></script>
+</body>
+</html>

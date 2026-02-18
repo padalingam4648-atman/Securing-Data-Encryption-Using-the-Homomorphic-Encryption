@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption Complete - Homomorphic Encryption</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Animated Background -->
+        <div class="binary-bg"></div>
+        
+        <!-- Result Card -->
+        <div class="glass-card result-card fade-in">
+            <!-- Success Checkmark Animation -->
+            <div class="success-checkmark">
+                <svg class="checkmark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="checkmark-circle" cx="50" cy="50" r="45" fill="none" stroke="url(#successGradient)" stroke-width="4"/>
+                    <path class="checkmark-check" d="M 30 50 L 45 65 L 70 35" fill="none" stroke="#10b981" stroke-width="5" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="successGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            
+            <h1 class="title">Encryption Complete!</h1>
+            <p class="description">Your file has been successfully encrypted using Homomorphic Encryption</p>
+            
+            <!-- Security Warning -->
+            <div class="security-notice" style="background: rgba(239, 68, 68, 0.1); border-color: #EF4444;">
+                <div class="notice-icon">⚠️</div>
+                <div class="notice-content">
+                    <strong>Important: Save Your Private Key!</strong>
+                    <p>You will need this private key to decrypt your file. Store it securely and never share it.</p>
+                </div>
+            </div>
+            
+            <!-- Private Key Section -->
+            <div class="output-section">
+                <h3 class="output-title">🔑 Private Key (Required for Decryption)</h3>
+                <div class="output-box" id="privateKeyOutput" style="background: rgba(239, 68, 68, 0.05); border-color: #EF4444;">
+                    Loading...
+                </div>
+                <div class="output-actions">
+                    <button class="btn-secondary" onclick="copyPrivateKey()">
+                        📋 Copy Private Key
+                    </button>
+                    <button class="btn-secondary" onclick="downloadPrivateKey()">
+                        💾 Download Key File
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Encrypted Output Preview -->
+            <div class="output-section">
+                <h3 class="output-title">Encrypted Output</h3>
+                <div class="output-box encrypted" id="encryptedOutput">
+                    Loading...
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="button-group">
+                <button class="btn-primary neon-glow" id="downloadBtn">
+                    Download Encrypted File
+                </button>
+                <button class="btn-secondary" onclick="window.location.href='decrypt.html'">
+                    🔓 Decrypt File
+                </button>
+            </div>
+            
+            <button class="btn-text" onclick="window.location.href='index.html'">
+                ← Back to Home
+            </button>
+        </div>
+    </div>
+    
+    <script src="js/result.js"></script>
+</body>
+</html>

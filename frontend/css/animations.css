@@ -1,0 +1,264 @@
+/* ===================================
+   ANIMATIONS
+   =================================== */
+
+/* Page Fade In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Rotating Lock Animation */
+@keyframes rotateLock {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
+}
+
+.rotating-lock {
+    animation: rotateLock 3s ease-in-out infinite;
+}
+
+/* Processing Lock - Continuous Rotation */
+@keyframes spinLock {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.processing-lock {
+    animation: spinLock 2s linear infinite;
+}
+
+/* Neon Glow Effect */
+@keyframes neonGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(37, 99, 235, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(37, 99, 235, 0.4);
+    }
+}
+
+.neon-glow:hover:not(:disabled) {
+    animation: neonGlow 1.5s ease-in-out infinite;
+}
+
+/* Loading Spinner */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(59, 130, 246, 0.2);
+    border-top-color: #3B82F6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Success Checkmark Animation */
+@keyframes drawCircle {
+    0% {
+        stroke-dasharray: 0, 283;
+    }
+    100% {
+        stroke-dasharray: 283, 283;
+    }
+}
+
+@keyframes drawCheck {
+    0% {
+        stroke-dasharray: 0, 60;
+    }
+    100% {
+        stroke-dasharray: 60, 60;
+    }
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.checkmark-circle {
+    stroke-dasharray: 283;
+    stroke-dashoffset: 0;
+    animation: drawCircle 0.8s ease-out forwards;
+}
+
+.checkmark-check {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: drawCheck 0.6s ease-out 0.8s forwards;
+}
+
+.success-checkmark {
+    animation: scaleIn 0.5s ease-out;
+}
+
+/* Binary Background Animation */
+@keyframes binaryFall {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+.binary-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.binary-bg::before,
+.binary-bg::after {
+    content: '01001000 01101111 01101101 01101111 01101101 01101111 01110010 01110000 01101000 01101001 01100011';
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: rgba(59, 130, 246, 0.08);
+    white-space: nowrap;
+    animation: binaryFall 15s linear infinite;
+}
+
+.binary-bg::before {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.binary-bg::after {
+    left: 60%;
+    animation-delay: 7s;
+}
+
+.binary-bg.active::before,
+.binary-bg.active::after {
+    animation-duration: 8s;
+    color: rgba(59, 130, 246, 0.15);
+}
+
+/* Glow Text Effect */
+@keyframes textGlow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 30px rgba(37, 99, 235, 0.3);
+    }
+}
+
+.glow-text {
+    animation: textGlow 3s ease-in-out infinite;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Slide In From Bottom */
+@keyframes slideInBottom {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-bottom {
+    animation: slideInBottom 0.6s ease-out;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decrypt File - Homomorphic Encryption</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Animated Background -->
+        <div class="binary-bg"></div>
+        
+        <!-- Decrypt Card -->
+        <div class="glass-card decrypt-card fade-in">
+            <h1 class="title">Decrypt Your File</h1>
+            <p class="description">Upload encrypted file and provide the secret key</p>
+            
+            <!-- Security Notice -->
+            <div class="security-notice">
+                <div class="notice-icon">🔒</div>
+                <div class="notice-content">
+                    <strong>Client-Side Decryption</strong>
+                    <p>Decryption happens entirely in your browser. Your secret key never leaves your device.</p>
+                </div>
+            </div>
+            
+            <!-- Encrypted File Upload -->
+            <div class="upload-section">
+                <h3 class="section-title">1. Upload Encrypted File</h3>
+                <div class="drop-zone" id="encryptedDropZone">
+                    <svg class="upload-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="uploadGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#2563EB;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 50 20 L 50 60" stroke="url(#uploadGradient)" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M 35 35 L 50 20 L 65 35" stroke="url(#uploadGradient)" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        <path d="M 20 70 L 20 80 Q 20 85 25 85 L 75 85 Q 80 85 80 80 L 80 70" stroke="url(#uploadGradient)" stroke-width="4" stroke-linecap="round" fill="none"/>
+                    </svg>
+                    <p class="drop-text">Drop encrypted file here</p>
+                    <p class="drop-subtext">or</p>
+                    <label for="encryptedFileInput" class="btn-secondary">Browse Files</label>
+                    <input type="file" id="encryptedFileInput" accept=".enc,.encrypted,.txt" hidden>
+                </div>
+                
+                <div class="file-info" id="encryptedFileInfo" style="display: none;">
+                    <div class="file-details">
+                        <span class="file-icon">🔐</span>
+                        <div class="file-text">
+                            <p class="file-name" id="encryptedFileName"></p>
+                            <p class="file-size" id="encryptedFileSize"></p>
+                        </div>
+                    </div>
+                    <button class="btn-remove" id="removeEncryptedBtn">✕</button>
+                </div>
+            </div>
+            
+            <!-- Secret Key Upload -->
+            <div class="upload-section">
+                <h3 class="section-title">2. Provide Secret Key</h3>
+                <div class="key-input-options">
+                    <div class="option-tabs">
+                        <button class="tab-btn active" data-tab="upload">Upload Key File</button>
+                        <button class="tab-btn" data-tab="paste">Paste Key</button>
+                    </div>
+                    
+                    <!-- Upload Key Tab -->
+                    <div class="tab-content active" id="upload-tab">
+                        <div class="drop-zone small" id="keyDropZone">
+                            <p class="drop-text">Drop secret key file here</p>
+                            <label for="keyFileInput" class="btn-secondary">Browse Key File</label>
+                            <input type="file" id="keyFileInput" accept=".key,.pem,.txt" hidden>
+                        </div>
+                        
+                        <div class="file-info" id="keyFileInfo" style="display: none;">
+                            <div class="file-details">
+                                <span class="file-icon">🔑</span>
+                                <div class="file-text">
+                                    <p class="file-name" id="keyFileName"></p>
+                                    <p class="file-size" id="keyFileSize"></p>
+                                </div>
+                            </div>
+                            <button class="btn-remove" id="removeKeyBtn">✕</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Paste Key Tab -->
+                    <div class="tab-content" id="paste-tab">
+                        <textarea 
+                            id="keyTextArea" 
+                            class="key-textarea" 
+                            placeholder="Paste your secret key here...&#10;&#10;Example:&#10;-----BEGIN PRIVATE KEY-----&#10;MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC...&#10;-----END PRIVATE KEY-----"
+                        ></textarea>
+                        <p class="key-hint">⚠️ Never share your secret key with anyone</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage" style="display: none;"></div>
+            
+            <!-- Decrypt Button -->
+            <button class="btn-primary" id="decryptBtn" disabled>
+                🔓 Decrypt File
+            </button>
+            
+            <!-- Back Button -->
+            <button class="btn-text" onclick="window.location.href='index.html'">
+                ← Back to Home
+            </button>
+        </div>
+    </div>
+    
+    <script src="js/decrypt.js"></script>
+</body>
+</html>
