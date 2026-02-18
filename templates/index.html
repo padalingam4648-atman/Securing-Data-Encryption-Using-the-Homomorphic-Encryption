@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Cloud Storage - Homomorphic Encryption</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 Secure Cloud Storage</h1>
+            <p>Encrypt your files using homomorphic encryption</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2>📤 Upload & Encrypt File</h2>
+                <form id="encryptForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="file">Select a text file:</label>
+                        <input type="file" id="file" name="file" accept=".txt" required>
+                        <small>Supported: .txt files (max 50MB)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dropbox_token">Dropbox Access Token (Optional):</label>
+                        <input type="password" id="dropbox_token" name="dropbox_token" placeholder="Enter your Dropbox token">
+                        <small>Leave empty to save locally only. Get token from <a href="https://www.dropbox.com/developers/apps" target="_blank">Dropbox Developer Console</a></small>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary">🔒 Encrypt & Upload</button>
+                    </div>
+                </form>
+
+                <div id="status" class="status-message"></div>
+                <div id="result" class="result"></div>
+            </div>
+
+            <div class="card">
+                <h2>📥 Download Sample Encrypted File</h2>
+                <p>Download the last encrypted file that was processed:</p>
+                <button id="downloadBtn" class="btn btn-secondary">📥 Download</button>
+                <div id="downloadStatus" class="status-message"></div>
+            </div>
+
+            <div class="card info-card">
+                <h2>ℹ️ How It Works</h2>
+                <ol>
+                    <li><strong>Upload:</strong> Select a text file to encrypt</li>
+                    <li><strong>Convert:</strong> File is converted to ASCII values</li>
+                    <li><strong>Encrypt:</strong> Data encrypted using CKKS homomorphic encryption</li>
+                    <li><strong>Compress:</strong> Encrypted data is compressed with gzip</li>
+                    <li><strong>Upload:</strong> Optional upload to Dropbox (if token provided)</li>
+                </ol>
+            </div>
+
+            <div class="card tech-card">
+                <h2>🛡️ Technology</h2>
+                <ul>
+                    <li><strong>Encryption:</strong> TenSEAL CKKS Homomorphic Encryption</li>
+                    <li><strong>Compression:</strong> GZIP</li>
+                    <li><strong>Cloud:</strong> Dropbox Integration</li>
+                    <li><strong>Backend:</strong> Flask Python</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <p>Your files are encrypted locally before upload. Access token is not stored.</p>
+        </footer>
+    </div>
+
+    <script>
+        const form = document.getElementById('encryptForm');
+        const statusDiv = document.getElementById('status');
+        const resultDiv = document.getElementById('result');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const downloadStatus = document.getElementById('downloadStatus');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            statusDiv.textContent = 'Encrypting file...';
+            statusDiv.className = 'status-message loading';
+            resultDiv.innerHTML = '';
+
+            try {
+                const response = await fetch('/upload-and-encrypt', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    statusDiv.textContent = '✅ ' + data.message;
+                    statusDiv.className = 'status-message success';
+                    resultDiv.innerHTML = `
+                        <div class="result-content">
+                            <p><strong>File:</strong> ${data.filename}</p>
+                            <p><strong>Encrypted Size:</strong> ${(data.size / 1024).toFixed(2)} KB</p>
+                            ${data.dropbox_uploaded ? '<p><strong>Status:</strong> ✅ Uploaded to Dropbox</p>' : ''}
+                            ${data.dropbox_error ? `<p class="error"><strong>Note:</strong> ${data.dropbox_error}</p>` : ''}
+                        </div>
+                    `;
+                    form.reset();
+                } else {
+                    statusDiv.textContent = '❌ Error: ' + (data.error || 'Unknown error');
+                    statusDiv.className = 'status-message error';
+                }
+            } catch (error) {
+                statusDiv.textContent = '❌ Error: ' + error.message;
+                statusDiv.className = 'status-message error';
+            }
+        });
+
+        downloadBtn.addEventListener('click', async () => {
+            downloadStatus.textContent = 'Downloading...';
+            downloadStatus.className = 'status-message loading';
+            
+            try {
+                const response = await fetch('/download-template');
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'encrypted_output.gz';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    downloadStatus.textContent = '✅ File downloaded';
+                    downloadStatus.className = 'status-message success';
+                } else {
+                    downloadStatus.textContent = '❌ No encrypted file available';
+                    downloadStatus.className = 'status-message error';
+                }
+            } catch (error) {
+                downloadStatus.textContent = '❌ Error: ' + error.message;
+                downloadStatus.className = 'status-message error';
+            }
+        });
+    </script>
+</body>
+</html>
