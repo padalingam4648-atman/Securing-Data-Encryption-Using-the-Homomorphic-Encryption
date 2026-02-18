@@ -1,3 +1,0 @@
-Hello, this is a sample text file for testing homomorphic encryption.
-This demonstrates secure cloud storage using TenSEAL encryption.
-The data will be encrypted, compressed, and can be uploaded to Dropbox.
